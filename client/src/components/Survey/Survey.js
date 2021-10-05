@@ -4,7 +4,7 @@ import { useSurvey } from '../../contexts/SurveyContext';
 const Survey = () => {
   const [answer, setAnswer] = useState();
 
-  const {setResults } = useSurvey();
+  const { setResults } = useSurvey();
 
   const handleChange = (e) => {
     setAnswer(e.target.id);

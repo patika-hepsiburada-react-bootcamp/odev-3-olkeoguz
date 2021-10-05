@@ -1,9 +1,13 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import {
+  sendNewResults,
+  connectSocket,
+  subscribeToResults,
+} from '../socket/socketApi';
 
 const SurveyContext = createContext();
 
 export default SurveyContext;
-
 
 //Starting point of results state
 const INITIALRESULTS = {
@@ -60,7 +64,34 @@ export const SurveyProvider = ({ children }) => {
         },
       ],
     }));
+
+    sendNewResults('new-vote', results);
+
   }, [results]);
+
+  useEffect(() => {
+    connectSocket();
+
+    subscribeToResults('new-vote', (res) => {
+      console.log('gelen', res);
+      setChartData((prev) => ({
+        ...prev,
+        datasets: [
+          ...prev.datasets,
+          {
+            ...prev.datasets[0],
+            data: [
+              res.Monday,
+              res.Tuesday,
+              res.Wednesday,
+              res.Thursday,
+              res.Friday,
+            ],
+          },
+        ],
+      }));
+    });
+  }, []);
 
   const values = {
     results,

@@ -25,6 +25,7 @@ const Survey = () => {
       return;
     }
 
+    // Context function to send the new results to the server
     submitNewResults(answer);
   };
   return (

@@ -7,6 +7,7 @@ import styles from './Chart.module.css';
 const Chart = () => {
   const { results } = useSurvey();
 
+  // Chart Information
   const chartData = {
     labels: ['Tailwind CSS', 'SCSS', 'Styled Components', 'Material UI', 'Bootstrap'],
     datasets: [

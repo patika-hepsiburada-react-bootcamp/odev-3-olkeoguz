@@ -11,11 +11,11 @@ export default SurveyContext;
 
 //Starting point of results state
 const INITIALRESULTS = {
-  Monday: 0,
-  Tuesday: 0,
-  Wednesday: 0,
-  Thursday: 0,
-  Friday: 0,
+  TailwindCSS: 0,
+  SCSS: 0,
+  StyledComponents: 0,
+  MaterialUI: 0,
+  Bootstrap: 0,
 };
 
 export const SurveyProvider = ({ children }) => {
@@ -24,12 +24,14 @@ export const SurveyProvider = ({ children }) => {
   const submitNewResults = (answer) => {
     const updatedResults = { ...results, [answer]: results[answer] + 1 };
     setResults(updatedResults);
+    // send the new results to server
     sendNewResults('new-vote', updatedResults);
   };
 
   useEffect(() => {
     connectSocket();
 
+    // get the latest results when the user first visits the page
     subscribeToResults('new-vote', (res) => {
       console.log('gelen', res);
       setResults(res);

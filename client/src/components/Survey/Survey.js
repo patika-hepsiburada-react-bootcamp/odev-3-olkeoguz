@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { useSurvey } from '../../contexts/SurveyContext';
 
+import Tailwind from '../../Logos/Tailwind';
+import Scss from '../../Logos/Scss';
+import StyledComponents from '../../Logos/StyledComponents';
+import MaterialUI from '../../Logos/MaterialUI';
+import Bootstrap from '../../Logos/Bootstrap';
+
+import styles from './Survey.module.css';
+
 const Survey = () => {
   const [answer, setAnswer] = useState();
 
@@ -13,64 +21,76 @@ const Survey = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!answer) {
-      alert('Please choose a day...');
+      alert('Please select one...');
       return;
     }
 
     submitNewResults(answer);
   };
   return (
-    <div>
+    <div className={styles.surveyContainer}>
       <div className='question'>
-        <p>What is your favorite day of the week?</p>
+        <h3> Which one do you use most often when writing Css?</h3>
       </div>
       <form className='radios' onSubmit={handleSubmit}>
         <label>
           <input
-            type='checkbox'
-            id='Monday'
-            checked={answer === 'Monday'}
+            type='radio'
+            id='TailwindCSS'
+            checked={answer === 'TailwindCSS'}
             onChange={handleChange}
           />
-          Monday
+          <div className={styles.tailwind}>
+            <Tailwind />
+          </div>
         </label>
         <label>
           <input
-            type='checkbox'
-            id='Tuesday'
-            checked={answer === 'Tuesday'}
+            type='radio'
+            id='SCSS'
+            checked={answer === 'SCSS'}
             onChange={handleChange}
           />
-          Tuesday
+          <div className={styles.scss}>
+            <Scss />
+          </div>
         </label>
         <label>
           <input
-            type='checkbox'
-            id='Wednesday'
-            checked={answer === 'Wednesday'}
+            type='radio'
+            id='StyledComponents'
+            checked={answer === 'StyledComponents'}
             onChange={handleChange}
           />
-          Wednesday
+          <div className={styles.scss}>
+            <StyledComponents />
+          </div>
         </label>
         <label>
           <input
-            type='checkbox'
-            id='Thursday'
-            checked={answer === 'Thursday'}
+            type='radio'
+            id='MaterialUI'
+            checked={answer === 'MaterialUI'}
             onChange={handleChange}
           />
-          Thursday
+          <div className={styles.scss}>
+            <MaterialUI />
+          </div>
         </label>
         <label>
           <input
-            type='checkbox'
-            id='Friday'
-            checked={answer === 'Friday'}
+            type='radio'
+            id='Bootstrap'
+            checked={answer === 'Bootstrap'}
             onChange={handleChange}
           />
-          Friday
+          <div className={styles.scss}>
+            <Bootstrap />
+          </div>
         </label>
-        <button type='submit'>Submit</button>
+        <div className={styles.btn}>
+          <button type='submit'>Submit</button>
+        </div>
       </form>
     </div>
   );

@@ -9,19 +9,22 @@ app.get('/', (req, res) => {
   res.end('Live Voting App');
 });
 
-let serverResults = {};
+let serverResults = {
+  TailwindCSS: 0,
+  SCSS: 0,
+  StyledComponents: 0,
+  MaterialUI: 0,
+  Bootstrap: 0,
+};
 
 io.on('connection', (socket) => {
   console.log('a user connected');
   socket.emit('new-vote', serverResults);
 
   socket.on('new-vote', (results) => {
-    // console.log('New Vote 1 :', results);
-    serverResults = results;
-
     io.emit('new-vote', results);
     serverResults = results;
-    console.log('server-res', results);
+    console.log('server-res', serverResults);
   });
 
   socket.on('disconnect', () => console.log('a user disconnected'));
